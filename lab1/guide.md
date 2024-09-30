@@ -33,11 +33,10 @@ Once you established a connection to the cloud machine,
 run the following commands in the terminal:
 
 ```bash
-sudo apt-get update
-sudo apt-get upgrade -y
+sudo apt-get update && sudo apt-get upgrade -y
 ```
 
-The purpose of these terminal is to bring the base Ubuntu operating system
+The purpose of these commands is to bring the base Ubuntu operating system
 up to date.
 
 `apt` is the command for the [package manager](https://ubuntu.com/server/docs/package-management)
@@ -45,6 +44,16 @@ on Ubuntu, which we will use a lot through this course.
 
 ## Step 2: install the `vagrant` package
 
+We will be using the [`vagrant`](https://www.vagrantup.com/) tool for easy
+deployment and management of virtual machines (VMs).
+Fortunately, the `vagrant` tool is already managed by the `apt`
+so we can simply install it via
+
 ```bash
-sudo apt-get install vagrant -y
+sudo apt-get install virtualbox vagrant -y
+```
+
+## Step 3: launching up your first VM
+
+```bash
 ```
