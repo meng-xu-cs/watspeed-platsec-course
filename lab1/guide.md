@@ -15,6 +15,16 @@ Upon successful completion of the lab,
 you should be able to deploy a simple webserver
 running inside the container of your VM.
 
+## Step 0: Establish an SSH connection to the cloud machine
+
+Please refer to the [CloudLabs documentation](https://docs.cloudlabs.ai/Learner/ConnectToTheVM)
+for the instructions to connect to the cloud machine assigned to you.
+
+Note that you will need
+*VM DNS name*, *VM Admin Username*, and *VM Admin Password*
+to make the connection,
+which can be found in the landing page of the lab.
+
 ## Step 1: Update the installed packages
 
 ```bash
