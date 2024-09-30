@@ -65,4 +65,38 @@ sudo apt-get install virtualbox vagrant -y
 ## Step 3: launching up your first VM
 
 ```bash
+vagrant up
 ```
+
+## Step 4: install Docker inside the VM
+
+```bash
+vagrant ssh
+```
+
+1. Set up Docker's `apt` repository.
+```bash
+sudo apt-get update
+sudo apt-get install ca-certificates curl
+sudo install -m 0755 -d /etc/apt/keyrings
+sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+sudo chmod a+r /etc/apt/keyrings/docker.asc
+```
+
+2. Install the Docker packages.
+```bash
+sudo apt-get install -y \
+    docker-ce docker-ce-cli containerd.io \
+    docker-buildx-plugin docker-compose-plugin
+```
+
+3. Verify that the Docker Engine installation is successful
+   by running the `hello-world` image.
+```bash
+sudo docker run hello-world
+```
+
+This command downloads a test image and runs it in a container.
+When the container runs, it prints a confirmation message and exits.
+If you see the confirmation message,
+you have now successfully installed and started Docker Engine.
