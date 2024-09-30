@@ -40,4 +40,11 @@ sudo apt-get upgrade -y
 The purpose of these terminal is to bring the base Ubuntu operating system
 up to date.
 
+`apt` is the command for the [package manager](https://ubuntu.com/server/docs/package-management)
+on Ubuntu, which we will use a lot through this course.
+
 ## Step 2: install the `vagrant` package
+
+```bash
+sudo apt-get install vagrant -y
+```
