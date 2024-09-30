@@ -17,17 +17,27 @@ running inside the container of your VM.
 
 ## Step 0: Establish an SSH connection to the cloud machine
 
+You should see a terminal display alongside this lab guide.
+However, should you prefer to connect to the cloud machine in alternative ways,
 Please refer to the [CloudLabs documentation](https://docs.cloudlabs.ai/Learner/ConnectToTheVM)
 for the instructions to connect to the cloud machine assigned to you.
 
 Note that you will need
 *VM DNS name*, *VM Admin Username*, and *VM Admin Password*
 to make the connection,
-which can be found in the landing page of the lab.
+which can be found in the `Environment` tab on the lab manual page.
 
-## Step 1: Update the installed packages
+## Step 1: update the installed packages
+
+Once you established a connection to the cloud machine,
+run the following commands in the terminal:
 
 ```bash
 sudo apt-get update
 sudo apt-get upgrade -y
 ```
+
+The purpose of these terminal is to bring the base Ubuntu operating system
+up to date.
+
+## Step 2: install the `vagrant` package
