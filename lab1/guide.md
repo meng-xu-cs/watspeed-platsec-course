@@ -50,11 +50,12 @@ In this step, we will setup our first level of isolation ---
 a virtual machine (VM).
 
 More specifically, we will be using
-- [VirtualBox](https://www.virtualbox.org/) as the backend for the VM and
-- the [`vagrant`](https://www.vagrantup.com/) tool for easy
-  deployment and management of virtual machines (VMs).
+- [VirtualBox](https://www.virtualbox.org/) as the backend
+  for actually running the VMs, and
+- [`vagrant`](https://www.vagrantup.com/) as the frontend
+  for easy deployment and management of VMs.
 
-Fortunately, both tools are already indexed by the `apt` package manager
+Fortunately, both tools are already indexed by the `apt` package manager,
 so we can simply install them via
 
 ```bash
