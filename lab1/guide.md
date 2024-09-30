@@ -42,12 +42,20 @@ up to date.
 `apt` is the command for the [package manager](https://ubuntu.com/server/docs/package-management)
 on Ubuntu, which we will use a lot through this course.
 
-## Step 2: install the `vagrant` package
+## Step 2: install VM-related packages
 
-We will be using the [`vagrant`](https://www.vagrantup.com/) tool for easy
-deployment and management of virtual machines (VMs).
-Fortunately, the `vagrant` tool is already managed by the `apt`
-so we can simply install it via
+As we will be learning attacks and defenses in this course,
+it is not a bad idea to run the experiments in an isolated environment.
+In this step, we will setup our first level of isolation ---
+a virtual machine (VM).
+
+More specifically, we will be using
+- [VirtualBox](https://www.virtualbox.org/) as the backend for the VM and
+- the [`vagrant`](https://www.vagrantup.com/) tool for easy
+  deployment and management of virtual machines (VMs).
+
+Fortunately, both tools are already indexed by the `apt` package manager
+so we can simply install them via
 
 ```bash
 sudo apt-get install virtualbox vagrant -y
