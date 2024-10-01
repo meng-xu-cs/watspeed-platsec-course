@@ -1,4 +1,4 @@
-# Lab 1 - Docker Container Inside Virtual Machine
+# Lab 1 - Container Inside Virtual Machine
 
 This introductory lab intends to familiarize you with
 the Ubuntu operating system (a Linux distribution) and
@@ -140,3 +140,20 @@ This command downloads a test image and runs it in a container.
 When the container runs, it prints a confirmation message and exits.
 If you see the confirmation message,
 you have now successfully installed and started Docker Engine.
+
+## Step 5: run the Apache Docker image as a sandboxed webserver
+
+The official Apache image on Docker Hub is `httpd`.
+Download the image to your VM with the `docker pull` command:
+
+```bash
+docker pull httpd
+```
+
+After pulling,
+use the `docker run` command to create and start a Docker container
+based on the `httpd` image:
+
+```bash
+docker run -d --name apache -p 80:80 httpd
+```
