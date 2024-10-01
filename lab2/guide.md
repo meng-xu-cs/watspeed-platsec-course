@@ -91,4 +91,60 @@ If you are interested in
 how shellcode works and/or
 how write a shellcode from scratch,
 you can learn that from a diverse range of tutorials online,
-such as the [shellcode lab](https://seedsecuritylabs.org/Labs_20.04/Software/Shellcode/).
+such as the [shellcode lab](https://seedsecuritylabs.org/Labs_20.04/Software/Shellcode/)
+in the [SEED Labs](https://seedsecuritylabs.org/labs.html) project.
+
+### Invoking the shellcode
+
+In this task,
+we will test the shellcode that invokes `/bin/sh` (i.e., spawns a shell)
+by putting it into a C program.
+
+```c
+#include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
+
+const char shellcode[] =
+#if __x86_64__
+  "\x48\x31\xd2\x52\x48\xb8\x2f\x62\x69\x6e"
+  "\x2f\x2f\x73\x68\x50\x48\x89\xe7\x52\x57"
+  "\x48\x89\xe6\x48\x31\xc0\xb0\x3b\x0f\x05"
+#else
+  "\x31\xc0\x50\x68\x2f\x2f\x73\x68\x68\x2f"
+  "\x62\x69\x6e\x89\xe3\x50\x53\x89\xe1\x31"
+  "\xd2\x31\xc0\xb0\x0b\xcd\x80"
+#endif
+;
+
+int main(int argc, char **argv) {
+    char code[500];
+    strcpy(code, shellcode);        // Copy the shellcode to the stack
+    int (*func)() = (int(*)())code;
+    func();                         // Invoke the shellcode from the stack
+    return 1;
+}
+```
+
+Now, save the C code into a file named `call_shellcode.c`
+and compile it with:
+
+```bash
+gcc -m32 -z execstack -o a32.out call_shellcode.c
+gcc -z execstack -o a64.out call_shellcode.c
+```
+You will notice that two binaries are produced
+`a32.out` and `a64.out`.
+
+The `call_shellcode.c` file includes two copies of shellcode,
+one is 32-bit and the other is 64-bit.
+When we compile the program using the `-m32` flag,
+the 32-bit version will be used;
+without this flag, the 64-bit version will be used.
+It should also be noted that
+the compilation uses the `-z execstack` option,
+which allows code to be executed from the stack;
+without this option, the program will fail.
+
+Now run the `./a32.out` and `./a64.out` binaries and
+describe what you observe.
