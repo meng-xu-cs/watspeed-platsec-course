@@ -1,0 +1,13 @@
+[
+    {
+        "Name": "Lab 2 - Buffer Overflows",
+        "Language": "English",
+        "BaseURL": "https://github.com/meng-xu-cs/watspeed-platsec-course/tree/main",
+        "Files": [
+            {
+                "RawFilePath": "https://raw.githubusercontent.com/meng-xu-cs/watspeed-platsec-course/refs/heads/main/lab2/guide.md",
+                "Order": 1
+            }
+        ]
+    }
+]
