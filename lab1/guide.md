@@ -62,17 +62,51 @@ so we can simply install them via
 sudo apt-get install virtualbox vagrant -y
 ```
 
-## Step 3: launching up your first VM
+## Step 3: launch your first VM
+
+In order for `vagrant` to manage a VM,
+you need to provide a `Vagrantfile`.
+
+Save the following text to a file named `Vagrantfile`
+under your home directory.
+```rb
+Vagrant.configure("2") do |config|
+  config.vm.box = "ubuntu/jammy64"
+  config.vm.provider "virtualbox" do |v|
+    v.cpus = "1"
+    v.memory = "4096"
+  end
+end
+```
+
+Tips: you can use any terminal-oriented text-editing tool
+to create this file. Common choices include `vim` and `nano`
+(both are available in the VM already).
+
+In the directory of the `Vagrantfile` (which was just created), run
 
 ```bash
 vagrant up
 ```
 
+This will launch and provision the VM.
+It may take a couple of minutes before the VM is ready to use.
+
 ## Step 4: install Docker inside the VM
+
+To get inside the VM, use the following command:
 
 ```bash
 vagrant ssh
 ```
+
+This will spawn a shell environment inside the VM you just launched.
+You will be greeted by the welcome message by the Ubuntu operating system
+and note that your username inside the VM is `vagrant`,
+not the username you use to access the cloud machine.
+
+Once you are in the shell of the VM,
+follow the following steps to setup a Docker environment:
 
 1. Set up Docker's `apt` repository.
 ```bash
