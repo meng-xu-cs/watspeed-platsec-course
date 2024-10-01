@@ -148,3 +148,109 @@ without this option, the program will fail.
 
 Now run the `./a32.out` and `./a64.out` binaries and
 describe what you observe.
+
+## Step 2: understanding the vulnerable program
+
+The vulnerable program used in this lab is shown below.
+Please first save it in a file named `stack.c` and we will need it later.
+This program has a buffer-overflow vulnerability,
+and your job is to exploit this vulnerability and gain the root privilege.
+But now, let's take some time to first understand it.
+
+```c
+#include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
+
+void buffer_overflow(char *str) {
+    char buffer[100];
+    strcpy(buffer, str);
+}
+
+void dummy_function(char *str) {
+    char dummy_buffer[1000];
+    memset(dummy_buffer, 0, 1000);
+    buffer_overflow(str);
+}
+
+int main(int argc, char **argv) {
+    char str[517];
+    FILE *badfile;
+
+    badfile = fopen("badfile", "r");
+    if (!badfile) {
+       perror("Opening badfile"); exit(1);
+    }
+
+    int length = fread(str, sizeof(char), 517, badfile);
+    printf("Input size: %d\n", length);
+    dummy_function(str);
+    fprintf(stdout, "==== Returned Properly ====\n");
+    return 0;
+}
+```
+
+### Analysis
+
+The above program has a buffer overflow vulnerability.
+It first reads an input from a file called `badfile`, and then
+passes this input to another buffer in the function `buffer_overflow()`.
+The original input can have a maximum length of 517 bytes,
+but the buffer in `buffer_overflow()` is only 100 bytes long,
+which is less than 517.
+Because `strcpy()` does not check boundaries,
+buffer overflow will occur.
+Since this program is a root-owned `Set-UID` program,
+if a normal user can exploit this buffer overflow vulnerability,
+the user might be able to get a root shell.
+It should be noted that the program gets its input from a file called `badfile`.
+This file is under users’ control.
+Now, our objective is to create the contents for `badfile`,
+such that when the vulnerable program copies the contents into its buffer,
+a root shell can be spawned.
+
+### Compilation and execution
+
+To compile the program, use the following command
+```bash
+gcc -m32 -o stack32 -z execstack -fno-stack-protector stack.c
+```
+This will produce a binary named `stack32`
+which you can execute using `./stack32`.
+
+However, this is not a `root`-owned `Set-UID` program yet.
+We can achieve this by
+first change the ownership of the program to `root` and
+then change the permission to `4755` to enable the `Set-UID` bit,
+as shown in the following command:
+```bash
+sudo chown root stack32
+sudo chmod 4755 stack32
+```
+
+Similar to the shellcode case,
+the above instructions produce a 32-bit executable only.
+We can obtain a 64-bit version by dropping the `-m32` flag during compilation:
+```bash
+gcc -o stack64 -z execstack -fno-stack-protector stack.c
+sudo chown root stack64
+sudo chmod 4755 stack64
+```
+
+Will exploit both versions in the following steps.
+
+## Step 3: launching Attack on the 32-bit version (`stack32`)
+
+To exploit the buffer-overflow vulnerability in the `stack32` program,
+you need to prepare a payload, and save it inside `badfile`.
+
+Please submit the `badfile` as well as any scripts, screenshots, or documents
+that you may deem necessary to show your understanding of the task.
+
+## Step 4: launching Attack on the 64-bit version (`stack64`)
+
+To exploit the buffer-overflow vulnerability in the `stack64` program,
+you need to prepare a payload, and save it inside `badfile`.
+
+Please submit the `badfile` as well as any scripts, screenshots, or documents
+that you may deem necessary to show your understanding of the task.
