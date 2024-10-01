@@ -59,7 +59,7 @@ Fortunately, both tools are already indexed by the `apt` package manager,
 so we can simply install them via
 
 ```bash
-sudo apt-get install virtualbox vagrant -y
+sudo apt-get install -y virtualbox vagrant
 ```
 
 ## Step 3: launch your first VM
@@ -110,11 +110,17 @@ follow the following steps to setup a Docker environment:
 
 1. Set up Docker's `apt` repository.
 ```bash
-sudo apt-get update
-sudo apt-get install ca-certificates curl
+sudo apt-get update && sudo apt-get upgrade -y
+sudo apt-get install -y ca-certificates curl
 sudo install -m 0755 -d /etc/apt/keyrings
 sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
 sudo chmod a+r /etc/apt/keyrings/docker.asc
+
+echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
+  $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
+  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+sudo apt-get update
 ```
 
 2. Install the Docker packages.
