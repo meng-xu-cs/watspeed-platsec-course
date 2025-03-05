@@ -1,1 +1,13 @@
-
+[
+    {
+        "Name": "Lab 4 - Seccomp Sandboxes",
+        "Language": "English",
+        "BaseURL": "https://github.com/meng-xu-cs/watspeed-platsec-course/tree/main",
+        "Files": [
+            {
+                "RawFilePath": "https://raw.githubusercontent.com/meng-xu-cs/watspeed-platsec-course/refs/heads/main/lab4/guide.md",
+                "Order": 1
+            }
+        ]
+    }
+]
