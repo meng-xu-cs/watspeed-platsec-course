@@ -1,7 +1,7 @@
-# Lab 4: Escaping `seccomp`-based Sandboxes Lab
+# Lab 4: Seccomp-sandboxes and Evasion Lab 
+## Escaping `seccomp`-based Sandboxes
 
 ### Overview
-
 
 ### 1. Lab Tasks
 
