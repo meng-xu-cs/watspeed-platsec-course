@@ -55,11 +55,29 @@ More specifically, we will be using
 - [`vagrant`](https://www.vagrantup.com/) as the frontend
   for easy deployment and management of VMs.
 
-Fortunately, both tools are already indexed by the `apt` package manager,
-so we can simply install them via
+One way of installing them is to download the installer from their
+official websites and follow the instructions to run the installer.
+But on most Linux-based distributions (including Ubuntu),
+there are simpler solutions --- install via the `apt` package manager.
+
+### Installing `virtualbox`
 
 ```bash
-sudo apt-get install -y virtualbox vagrant
+wget -O - https://www.virtualbox.org/download/oracle_vbox_2016.asc | sudo gpg --dearmor -o /etc/apt/trusted.gpg.d/virtualbox.gpg
+
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/trusted.gpg.d/virtualbox.gpg] http://download.virtualbox.org/virtualbox/debian $(lsb_release -cs) contrib" | sudo tee /etc/apt/sources.list.d/virtualbox.list
+
+sudo apt update && sudo apt install virtualbox-7.1
+```
+
+### Installing `vagrant`
+
+```bash
+wget -O - https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg
+
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list
+
+sudo apt update && sudo apt install vagrant
 ```
 
 ## Step 3: launch your first VM
@@ -73,8 +91,8 @@ under your home directory.
 Vagrant.configure("2") do |config|
   config.vm.box = "ubuntu/jammy64"
   config.vm.provider "virtualbox" do |v|
-    v.cpus = "1"
-    v.memory = "4096"
+    v.cpus = 2
+    v.memory = 4096
   end
 end
 ```
