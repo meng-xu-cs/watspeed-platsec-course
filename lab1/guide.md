@@ -109,6 +109,7 @@ Once you are in the shell of the VM,
 follow the following steps to setup a Docker environment:
 
 1. Set up Docker's `apt` repository.
+
 ```bash
 sudo apt-get update && sudo apt-get upgrade -y
 sudo apt-get install -y ca-certificates curl
@@ -124,6 +125,7 @@ sudo apt-get update
 ```
 
 2. Install the Docker packages.
+
 ```bash
 sudo apt-get install -y \
     docker-ce docker-ce-cli containerd.io \
@@ -132,6 +134,7 @@ sudo apt-get install -y \
 
 3. Verify that the Docker Engine installation is successful
    by running the `hello-world` image.
+
 ```bash
 sudo docker run hello-world
 ```
