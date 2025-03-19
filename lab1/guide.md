@@ -174,7 +174,7 @@ The official Apache image on Docker Hub is `httpd`.
 Download the image to your VM with the `docker pull` command:
 
 ```bash
-docker pull httpd
+sudo docker pull httpd
 ```
 
 After pulling,
@@ -182,5 +182,5 @@ use the `docker run` command to create and start a Docker container
 based on the `httpd` image:
 
 ```bash
-docker run -d --name apache -p 80:80 httpd
+sudo docker run -d --name apache -p 80:80 httpd
 ```
