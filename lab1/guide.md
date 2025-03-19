@@ -33,14 +33,18 @@ Once you established a connection to the cloud machine,
 run the following commands in the terminal:
 
 ```bash
-sudo apt-get update && sudo apt-get upgrade -y
+export DEBIAN_FRONTEND=noninteractive
+export NEEDRESTART_MODE=a
+
+sudo apt-get update
+sudo apt-get upgrade -y
 ```
 
 The purpose of these commands is to bring the base Ubuntu operating system
 up to date.
 
 `apt` is the command for the [package manager](https://ubuntu.com/server/docs/package-management)
-on Ubuntu, which we will use a lot through this course.
+on Ubuntu, which we will use a lot throughout this course.
 
 ## Step 2: install VM-related packages
 
@@ -67,7 +71,8 @@ wget -O - https://www.virtualbox.org/download/oracle_vbox_2016.asc | sudo gpg --
 
 echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/trusted.gpg.d/virtualbox.gpg] http://download.virtualbox.org/virtualbox/debian $(lsb_release -cs) contrib" | sudo tee /etc/apt/sources.list.d/virtualbox.list
 
-sudo apt update && sudo apt install -y virtualbox-7.1
+sudo apt update
+sudo apt install -y virtualbox-7.1
 ```
 
 ### Installing `vagrant`
@@ -77,7 +82,8 @@ wget -O - https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor -o /usr/sh
 
 echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list
 
-sudo apt update && sudo apt install -y vagrant
+sudo apt update
+sudo apt install -y vagrant
 ```
 
 ## Step 3: launch your first VM
@@ -90,6 +96,7 @@ under your home directory.
 ```rb
 Vagrant.configure("2") do |config|
   config.vm.box = "ubuntu/jammy64"
+  config.vm.network "forwarded_port", guest: 80, host: 8080
   config.vm.provider "virtualbox" do |v|
     v.cpus = 2
     v.memory = 4096
@@ -126,28 +133,27 @@ not the username you use to access the cloud machine.
 Once you are in the shell of the VM,
 follow the following steps to setup a Docker environment:
 
-1. Set up Docker's `apt` repository.
+1. Upgrade packages inside the the VM.
 
 ```bash
-sudo apt-get update && sudo apt-get upgrade -y
-sudo apt-get install -y ca-certificates curl
-sudo install -m 0755 -d /etc/apt/keyrings
-sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
-sudo chmod a+r /etc/apt/keyrings/docker.asc
+export DEBIAN_FRONTEND=noninteractive
+export NEEDRESTART_MODE=a
 
-echo \
-  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
-  $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
-  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 sudo apt-get update
+sudo apt-get upgrade -y
+sudo apt-get install -y ca-certificates
+sudo install -m 0755 -d /etc/apt/keyrings
 ```
 
 2. Install the Docker packages.
 
 ```bash
-sudo apt-get install -y \
-    docker-ce docker-ce-cli containerd.io \
-    docker-buildx-plugin docker-compose-plugin
+wget -O - https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.asc
+
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list
+
+sudo apt-get update
+sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 ```
 
 3. Verify that the Docker Engine installation is successful
