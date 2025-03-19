@@ -33,11 +33,10 @@ Once you established a connection to the cloud machine,
 run the following commands in the terminal:
 
 ```bash
-export DEBIAN_FRONTEND=noninteractive
-export NEEDRESTART_MODE=a
-
 sudo apt-get update
-sudo apt-get upgrade -y
+```
+```bash
+sudo DEBIAN_FRONTEND=noninteractive NEEDRESTART_MODE=a apt-get upgrade -y
 ```
 
 The purpose of these commands is to bring the base Ubuntu operating system
@@ -68,10 +67,14 @@ there are simpler solutions --- install via the `apt` package manager.
 
 ```bash
 wget -O - https://www.virtualbox.org/download/oracle_vbox_2016.asc | sudo gpg --dearmor -o /etc/apt/trusted.gpg.d/virtualbox.gpg
-
+```
+```bash
 echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/trusted.gpg.d/virtualbox.gpg] http://download.virtualbox.org/virtualbox/debian $(lsb_release -cs) contrib" | sudo tee /etc/apt/sources.list.d/virtualbox.list
-
+```
+```bash
 sudo apt update
+```
+```bash
 sudo apt install -y virtualbox-7.1
 ```
 
@@ -79,10 +82,14 @@ sudo apt install -y virtualbox-7.1
 
 ```bash
 wget -O - https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg
-
+```
+```bash
 echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list
-
+```
+```bash
 sudo apt update
+```
+```bash
 sudo apt install -y vagrant
 ```
 
@@ -137,23 +144,33 @@ follow the following steps to setup a Docker environment:
 
 ```bash
 export DEBIAN_FRONTEND=noninteractive
+```
+```bash
 export NEEDRESTART_MODE=a
-
-sudo apt-get update
-sudo apt-get upgrade -y
-sudo apt-get install -y ca-certificates
+```
+```bash
+sudo apt-get update && sudo apt-get upgrade -y
+```
+```bash
+sudo apt-get install -y ca-certificates curl
+```
+```bash
 sudo install -m 0755 -d /etc/apt/keyrings
 ```
 
 2. Install the Docker packages.
 
 ```bash
-wget -O - https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.asc
-
+sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+```
+```bash
+sudo chmod a+r /etc/apt/keyrings/docker.asc
+```
+```bash
 echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list
-
-sudo apt-get update
-sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+```
+```bash
+sudo apt-get update && sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 ```
 
 3. Verify that the Docker Engine installation is successful
@@ -184,3 +201,37 @@ based on the `httpd` image:
 ```bash
 sudo docker run -d --name apache -p 80:80 httpd
 ```
+
+## Validation
+
+At this step, you have successfully setted up a web server
+in a Dockerized environment inside a VM. To test it out,
+inside the VM on the console, try this command:
+```bash
+curl localhost:80
+```
+
+You are expected to see the following in the console output:
+```html
+<html><body><h1>It works!</h1></body></html>
+```
+If this is not the output, you might have missed a step above.
+
+## Task to Complete
+
+The validation step above only checks that you can access the web server
+inside the VM. In fact, your web server can also be accessed
+from outside publicly. This is something you need to explore
+in the rest of the assignment.
+
+Essentially, find a URL such that if you input the URL in your web browser
+(not the web browser inside the VM), the URL will lead you to a webpage
+that simply shows: "It works!".
+
+Hint: this URL consists of a host name and an optional port number.
+
+## Submission
+
+A Dropbox has been created on LEARN for lab submission.
+To complete this lab, submit the URL you have found in the Dropbox,
+and optionally, you can include a screenshot of the webpage behind this URL.
