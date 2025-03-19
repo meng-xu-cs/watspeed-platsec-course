@@ -125,7 +125,7 @@ needs to invoke this `vuln_reader` executable but when it is executed,
 
 ## Step 3: mitigate the vulnerability
 
-Submit a `safe_reader.c` that does what `vuln_reader.c` intends to do:
+Prepare a `safe_reader.c` that does what `vuln_reader.c` intends to do:
 i.e., print out the content of `target.txt` only after checking that
 `target.txt` is a link to `safe.txt`, but is not vulnerable to TOCTOU.
 
@@ -133,3 +133,12 @@ To check whether `safe_reader.c` is really safe, test it with the script
 you created for Step 2.
 
 Hint: check the `freadlink` library call.
+
+## Submission
+
+A Dropbox has been created on LEARN for lab submission.
+To complete this lab,
+please submit the Shell (`.sh`) or Python (`.py`) script you prepared in step 2
+as well as the `safe_reader.c` file you prepared in step 3.
+You can also submit any scripts, screenshots, or documents
+that you may deem necessary to show your understanding of the task.

@@ -147,7 +147,7 @@ which allows code to be executed from the stack;
 without this option, the program will fail.
 
 Now run the `./a32.out` and `./a64.out` binaries and
-describe what you observe.
+observe what these shellcode programs do.
 
 ## Step 2: understanding the vulnerable program
 
@@ -237,20 +237,44 @@ sudo chown root stack64
 sudo chmod 4755 stack64
 ```
 
-Will exploit both versions in the following steps.
+You will exploit both versions in the following steps.
 
-## Step 3: launching Attack on the 32-bit version (`stack32`)
+## Step 3: launching attack on the 32-bit version (`stack32`)
 
 To exploit the buffer-overflow vulnerability in the `stack32` program,
-you need to prepare a payload, and save it inside `badfile`.
+you need to prepare a payload, and save it in a file named `badfile`.
+After that, run
+```bash
+./stack32
+```
 
-Please submit the `badfile` as well as any scripts, screenshots, or documents
-that you may deem necessary to show your understanding of the task.
+If your payload exploits the intented vulnerability,
+you should expect to see a new shell being created.
+If the payload works, renamed the file as `badfile32` to be submitted later.
+```bash
+mv badfile badfile32
+```
 
-## Step 4: launching Attack on the 64-bit version (`stack64`)
+## Step 4: launching attack on the 64-bit version (`stack64`)
 
 To exploit the buffer-overflow vulnerability in the `stack64` program,
-you need to prepare a payload, and save it inside `badfile`.
+you need to prepare a payload, and save it in a file named `badfile`.
+After that, run
+```bash
+./stack64
+```
 
-Please submit the `badfile` as well as any scripts, screenshots, or documents
+If your payload exploits the intented vulnerability,
+you should expect to see a new shell being created.
+If the payload works, renamed the file as `badfile64` to be submitted later.
+```bash
+mv badfile badfile64
+```
+
+## Submission
+
+A Dropbox has been created on LEARN for lab submission.
+To complete this lab,
+please submit `badfile32`, `badfil64`,
+as well as any scripts, screenshots, or documents
 that you may deem necessary to show your understanding of the task.
