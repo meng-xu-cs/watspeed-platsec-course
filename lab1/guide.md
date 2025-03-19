@@ -75,7 +75,7 @@ echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/trusted.gpg.d/vi
 sudo apt update
 ```
 ```bash
-sudo apt install -y virtualbox-7.1
+sudo DEBIAN_FRONTEND=noninteractive NEEDRESTART_MODE=a apt install -y virtualbox-7.1
 ```
 
 ### Installing `vagrant`
@@ -90,7 +90,7 @@ echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/hashi
 sudo apt update
 ```
 ```bash
-sudo apt install -y vagrant
+sudo DEBIAN_FRONTEND=noninteractive NEEDRESTART_MODE=a apt install -y vagrant
 ```
 
 ## Step 3: launch your first VM
@@ -142,12 +142,6 @@ follow the following steps to setup a Docker environment:
 
 1. Upgrade packages inside the the VM.
 
-```bash
-export DEBIAN_FRONTEND=noninteractive
-```
-```bash
-export NEEDRESTART_MODE=a
-```
 ```bash
 sudo apt-get update && sudo apt-get upgrade -y
 ```
