@@ -67,7 +67,7 @@ wget -O - https://www.virtualbox.org/download/oracle_vbox_2016.asc | sudo gpg --
 
 echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/trusted.gpg.d/virtualbox.gpg] http://download.virtualbox.org/virtualbox/debian $(lsb_release -cs) contrib" | sudo tee /etc/apt/sources.list.d/virtualbox.list
 
-sudo apt update && sudo apt install virtualbox-7.1
+sudo apt update && sudo apt install -y virtualbox-7.1
 ```
 
 ### Installing `vagrant`
@@ -77,7 +77,7 @@ wget -O - https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor -o /usr/sh
 
 echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list
 
-sudo apt update && sudo apt install vagrant
+sudo apt update && sudo apt install -y vagrant
 ```
 
 ## Step 3: launch your first VM
