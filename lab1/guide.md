@@ -1,4 +1,4 @@
-# Lab 1 - Container Inside Virtual Machine
+# Lab 1 - Docker Inside VM
 
 This introductory lab intends to familiarize you with
 the Ubuntu operating system (a Linux distribution) and
