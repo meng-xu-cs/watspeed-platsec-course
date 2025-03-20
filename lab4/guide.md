@@ -7,6 +7,9 @@
 
 In this lab, we have provided four binary executable files: sandbox1, sandbox2, sandbox3, and sandbox4. Each of these programs implements a `seccomp`-based sandbox and employs some distinct filtering rules. The programs are designed to execute external programs `sploit1`, `sploit2`, `sploit3`, and `sploit4` respectively.
 
+#### Hint: You can use `seccomp-tools` [(https://github.com/david942j/seccomp-tools)](https://github.com/david942j/seccomp-tools) to get the detailed seccomp rules.
+
+<!--
    - `sandbox1.c` file
 
 ```
@@ -167,6 +170,7 @@ int main() {
 	execve(args[0], args, NULL);
 }
 ```
+-->
 
 Additionally, we have provided a `flag` file that stores a flag you required to get:
 
