@@ -50,8 +50,19 @@ Follow the prompt and set the environment variables with the suggested command o
 source sgxsdk/environment
 ```
 
-## Step 2: Understand the SGX application skeleton
+## Step 2: Download and understand the SGX application skeleton
 
+We provide a minimal skeleton of SGX application for you to get familiar with
+SGX application development. To get the skeleton, use
+```bash
+wget https://github.com/meng-xu-cs/watspeed-platsec-course/raw/refs/heads/main/lab7/sgx-skeleton.zip
+```
+```bash
+unzip sgx-skeleton.zip
+```
+```bash
+cd sgx-skeleton
+```
 
 
 ## Step 3: Implement the TODO items
