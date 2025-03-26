@@ -144,13 +144,17 @@ hence if you run program with
 ```
 
 And when promoted:
-> Please enter an integer: \
+>
+> Please enter an integer:
+>
 Enter `10`
 
 You should expect the following output:
+>
 > [SGX] Got input: 10 \
 > [App] Got result: 100 \
-> Goodbye!
+> Goodbye! \
+>
 
 If you get other output on the console,
 it is very like that the program you develop has some issues.
