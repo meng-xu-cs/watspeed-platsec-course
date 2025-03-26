@@ -4,18 +4,7 @@
 
 #include "sgx_trts.h"
 
-#include "Enclave.h"
 #include "Enclave_t.h"
-
-/*
- * ecall_secure_square:
- *   Invokes ECALL for secure computation inside the enclave.
- */
-int ecall_secure_square(int input)
-{
-    printf("[SGX] Got input: %d\n", input);
-    return input * input;
-}
 
 /* 
  * printf: 
@@ -31,3 +20,14 @@ int printf(const char* fmt, ...)
     ocall_print_string(buf);
     return (int)strnlen(buf, BUFSIZ - 1) + 1;
 }
+
+/*
+ * ecall_secure_square:
+ *   Invokes ECALL for secure computation inside the enclave.
+ */
+int ecall_secure_square(int input)
+{
+    printf("[SGX] Got input: %d\n", input);
+    return input * input;
+}
+

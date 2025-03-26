@@ -4,8 +4,9 @@
 #include <unistd.h>
 
 #include "sgx_urts.h"
-#include "App.h"
 #include "Enclave_u.h"
+
+#define ENCLAVE_FILENAME "enclave.signed.so"
 
 /* Global EID shared by multiple threads */
 sgx_enclave_id_t global_eid = 0;
