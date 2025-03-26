@@ -22,8 +22,7 @@ sudo apt-get update
 sudo DEBIAN_FRONTEND=noninteractive NEEDRESTART_MODE=a apt-get upgrade -y
 ```
 ```bash
-sudo apt-get install -y \
-    build-essential automake autoconf libtool wget libssl-dev unzip
+sudo apt-get install -y build-essential automake autoconf libtool wget libssl-dev unzip
 ```
 ```bash
 wget https://download.01.org/intel-sgx/latest/linux-latest/distro/ubuntu22.04-server/sgx_linux_x64_sdk_2.25.100.3.bin -O sgx_sdk.bin
@@ -36,22 +35,28 @@ chmod +x sgx_sdk.bin
 ```
 
 You will be greated by a prompt:
+> 
 > Do you want to install in current directory? [yes/no] :
+>
 Type `yes` in the command line and hit enter.
 
 If installation is successful, the screen should show
-> Installation is successful! The SDK package can be found in <your-current-path>/sgxsdk
+>
+> Installation is successful! The SDK package can be found in "your-current-path"/sgxsdk
+>
 
-Follow the prompt and set the environment variables with the suggested command or
+Follow the prompt and set the environment variables with the suggested command or using
 ```bash
 source sgxsdk/environment
 ```
 
-## Step 2: Understand the SGX application tempalate
+## Step 2: Understand the SGX application skeleton
 
 
 
-## Step 3: Validate your program
+## Step 3: Implement the TODO items
+
+## Step 4: Validate your program
 
 Test your program with some concrete numbers and verify that the program is responding correctly.
 
@@ -62,12 +67,12 @@ hence if you run program with
 ```
 
 And when promoted:
-> Please enter an integer:
+> Please enter an integer: \
 Enter `10`
 
 You should expect the following output:
-> [SGX] Got input: 10
-> [App] Got result: 100
+> [SGX] Got input: 10 \
+> [App] Got result: 100 \
 > Goodbye!
 
 If you get other output on the console, it is very like that the program you develop
