@@ -153,7 +153,7 @@ You should expect the following output:
 >
 > [SGX] Got input: 10 \
 > [App] Got result: 100 \
-> Goodbye! \
+> Goodbye!
 >
 
 If you get other output on the console,
