@@ -7,7 +7,7 @@ In this lab, we have provided four binary executable files: sandbox1, sandbox2, 
 
 #### Hint: You can use `seccomp-tools` [(https://github.com/david942j/seccomp-tools)](https://github.com/david942j/seccomp-tools) to get the detailed seccomp rules.
 
-### Environment Setup (CloudLab VM)
+### Environment Setup
 
 You should use a **CloudLab VM** for this assignment.
 
