@@ -9,168 +9,26 @@ In this lab, we have provided four binary executable files: sandbox1, sandbox2, 
 
 #### Hint: You can use `seccomp-tools` [(https://github.com/david942j/seccomp-tools)](https://github.com/david942j/seccomp-tools) to get the detailed seccomp rules.
 
-<!--
-   - `sandbox1.c` file
+### 2. Environment Setup
 
-```
-//sandbox1.c
+You should use a **CloudLab VM** for this assignment.
 
-#include <unistd.h>
-#include <seccomp.h>
-#include <linux/seccomp.h>
-#include <syscall.h>
-#include <stdlib.h>
+First, install required packages:
 
-int main() {
-	scmp_filter_ctx ctx;
-	ctx = seccomp_init(SCMP_ACT_ALLOW);
-	seccomp_rule_add(ctx, SCMP_ACT_KILL, SCMP_SYS(write), 0);
-	seccomp_load(ctx);
-
-	char *args[] = {"./sploit1", NULL};
-	execve(args[0], args, NULL);
-}
+```bash
+sudo apt update
+sudo apt install gcc make strace -y
 ```
 
-   - `sandbox2.c` file
+Then, download and set up the lab files:
 
-```
-//sandbox2.c
-
-#include <unistd.h>
-#include <seccomp.h>
-#include <linux/seccomp.h>
-#include <syscall.h>
-#include <stdlib.h>
-
-int main() {
-	scmp_filter_ctx ctx;
-	ctx = seccomp_init(SCMP_ACT_KILL);
-	seccomp_rule_add(ctx, SCMP_ACT_ALLOW, SCMP_SYS(open), 0);
-	seccomp_rule_add(ctx, SCMP_ACT_ALLOW, SCMP_SYS(read), 0);
-	seccomp_rule_add(ctx, SCMP_ACT_ALLOW, SCMP_SYS(write), 0);
-
-    seccomp_rule_add(ctx, SCMP_ACT_ALLOW, SCMP_SYS(arch_prctl), 0);
-    seccomp_rule_add(ctx, SCMP_ACT_ALLOW, SCMP_SYS(mmap), 0);
-    seccomp_rule_add(ctx, SCMP_ACT_ALLOW, SCMP_SYS(access), 0);
-    seccomp_rule_add(ctx, SCMP_ACT_ALLOW, SCMP_SYS(newfstatat), 0);
-    seccomp_rule_add(ctx, SCMP_ACT_ALLOW, SCMP_SYS(close), 0);
-    seccomp_rule_add(ctx, SCMP_ACT_ALLOW, SCMP_SYS(mprotect), 0);
-    seccomp_rule_add(ctx, SCMP_ACT_ALLOW, SCMP_SYS(pread64), 0);
-    seccomp_rule_add(ctx, SCMP_ACT_ALLOW, SCMP_SYS(set_tid_address), 0);
-    seccomp_rule_add(ctx, SCMP_ACT_ALLOW, SCMP_SYS(set_robust_list), 0);
-    seccomp_rule_add(ctx, SCMP_ACT_ALLOW, SCMP_SYS(rseq), 0);
-    seccomp_rule_add(ctx, SCMP_ACT_ALLOW, SCMP_SYS(prlimit64), 0);
-    seccomp_rule_add(ctx, SCMP_ACT_ALLOW, SCMP_SYS(munmap), 0);
-    seccomp_rule_add(ctx, SCMP_ACT_ALLOW, SCMP_SYS(brk), 0);
-    seccomp_rule_add(ctx, SCMP_ACT_ALLOW, SCMP_SYS(execve), 0);
-    seccomp_rule_add(ctx, SCMP_ACT_ALLOW, SCMP_SYS(exit_group), 0);
-    seccomp_rule_add(ctx, SCMP_ACT_ALLOW, SCMP_SYS(fstat), 0);
-    seccomp_rule_add(ctx, SCMP_ACT_ALLOW, SCMP_SYS(getrandom), 0);
-    seccomp_rule_add(ctx, SCMP_ACT_ALLOW, SCMP_SYS(uname), 0);
-    seccomp_rule_add(ctx, SCMP_ACT_ALLOW, SCMP_SYS(readlink), 0);
-	seccomp_load(ctx);
-
-	char *args[] = {"./sploit2", NULL};
-	execve(args[0], args, NULL);
-}
-
+```bash
+wget http://ugster72d.student.cs.uwaterloo.ca/a4/a4_setup.sh
+chmod +x a4_setup.sh
+./a4_setup.sh
 ```
 
-   - `sandbox3.c` file
-
-```
-//sandbox3.c
-
-#include <unistd.h>
-#include <seccomp.h>
-#include <linux/seccomp.h>
-#include <syscall.h>
-
-int main() {
-	scmp_filter_ctx ctx;
-	ctx = seccomp_init(SCMP_ACT_ALLOW);
-
-	seccomp_rule_add(ctx, SCMP_ACT_KILL, SCMP_SYS(write), 0);
-	seccomp_rule_add(ctx, SCMP_ACT_KILL, SCMP_SYS(open), 0);
-    seccomp_rule_add(ctx, SCMP_ACT_KILL, SCMP_SYS(writev), 0);
-    // seccomp_rule_add(ctx, SCMP_ACT_KILL, SCMP_SYS(writev2), 0);
-    seccomp_rule_add(ctx, SCMP_ACT_KILL, SCMP_SYS(sendfile), 0);
-    seccomp_rule_add(ctx, SCMP_ACT_KILL, SCMP_SYS(sendfile64), 0);
-    seccomp_rule_add(ctx, SCMP_ACT_KILL, SCMP_SYS(ptrace), 0);
-    seccomp_rule_add(ctx, SCMP_ACT_KILL, SCMP_SYS(prctl), 0);
-    seccomp_rule_add(ctx, SCMP_ACT_KILL, SCMP_SYS(splice), 0);
-    seccomp_rule_add(ctx, SCMP_ACT_KILL, SCMP_SYS(tee), 0);
-    seccomp_rule_add(ctx, SCMP_ACT_KILL, SCMP_SYS(vmsplice), 0);
-    // seccomp_rule_add(ctx, SCMP_ACT_KILL, SCMP_SYS(pwrite), 0);
-    seccomp_rule_add(ctx, SCMP_ACT_KILL, SCMP_SYS(pwritev), 0);
-    seccomp_rule_add(ctx, SCMP_ACT_KILL, SCMP_SYS(pwritev2), 0);
-    seccomp_rule_add(ctx, SCMP_ACT_KILL, SCMP_SYS(pwrite64), 0);
-    seccomp_rule_add(ctx, SCMP_ACT_KILL, SCMP_SYS(open_by_handle_at), 0);
-    seccomp_rule_add(ctx, SCMP_ACT_KILL, SCMP_SYS(copy_file_range), 0);
-    seccomp_rule_add(ctx, SCMP_ACT_KILL, SCMP_SYS(pwritev2), 0);
-    seccomp_rule_add(ctx, SCMP_ACT_KILL, SCMP_SYS(ioctl), 0);
-    seccomp_rule_add(ctx, SCMP_ACT_KILL, SCMP_SYS(send), 0);
-    seccomp_rule_add(ctx, SCMP_ACT_KILL, SCMP_SYS(sendto), 0);
-    seccomp_rule_add(ctx, SCMP_ACT_KILL, SCMP_SYS(sendmsg), 0);
-    seccomp_rule_add(ctx, SCMP_ACT_KILL, SCMP_SYS(sendmmsg), 0);
-    seccomp_rule_add(ctx, SCMP_ACT_KILL, SCMP_SYS(msgsnd), 0);
-    
-    seccomp_arch_add(ctx, SCMP_ARCH_X86);
-	seccomp_load(ctx);
-
-	char *args[] = {"./sploit3", NULL};
-	execve(args[0], args, NULL);
-}
-```
-
-   - `sandbox4.c` file
-
-```
-//sandbox4.c
-
-#include <unistd.h>
-#include <seccomp.h>
-#include <linux/seccomp.h>
-#include <syscall.h>
-
-int main() {
-	scmp_filter_ctx ctx;
-	ctx = seccomp_init(SCMP_ACT_ALLOW);
-
-    seccomp_rule_add(ctx, SCMP_ACT_KILL, SCMP_SYS(write), 0);
-    seccomp_rule_add(ctx, SCMP_ACT_KILL, SCMP_SYS(open), 0);
-    seccomp_rule_add(ctx, SCMP_ACT_KILL, SCMP_SYS(writev), 0);
-    // seccomp_rule_add(ctx, SCMP_ACT_KILL, SCMP_SYS(writev2), 0);
-    seccomp_rule_add(ctx, SCMP_ACT_KILL, SCMP_SYS(sendfile), 0);
-    seccomp_rule_add(ctx, SCMP_ACT_KILL, SCMP_SYS(sendfile64), 0);
-    seccomp_rule_add(ctx, SCMP_ACT_KILL, SCMP_SYS(ptrace), 0);
-    seccomp_rule_add(ctx, SCMP_ACT_KILL, SCMP_SYS(prctl), 0);
-    seccomp_rule_add(ctx, SCMP_ACT_KILL, SCMP_SYS(splice), 0);
-    seccomp_rule_add(ctx, SCMP_ACT_KILL, SCMP_SYS(tee), 0);
-    seccomp_rule_add(ctx, SCMP_ACT_KILL, SCMP_SYS(vmsplice), 0);
-    // seccomp_rule_add(ctx, SCMP_ACT_KILL, SCMP_SYS(pwrite), 0);
-    seccomp_rule_add(ctx, SCMP_ACT_KILL, SCMP_SYS(pwritev), 0);
-    seccomp_rule_add(ctx, SCMP_ACT_KILL, SCMP_SYS(pwritev2), 0);
-    seccomp_rule_add(ctx, SCMP_ACT_KILL, SCMP_SYS(pwrite64), 0);
-    seccomp_rule_add(ctx, SCMP_ACT_KILL, SCMP_SYS(open_by_handle_at), 0);
-    seccomp_rule_add(ctx, SCMP_ACT_KILL, SCMP_SYS(copy_file_range), 0);
-    seccomp_rule_add(ctx, SCMP_ACT_KILL, SCMP_SYS(pwritev2), 0);
-    seccomp_rule_add(ctx, SCMP_ACT_KILL, SCMP_SYS(ioctl), 0);
-    seccomp_rule_add(ctx, SCMP_ACT_KILL, SCMP_SYS(send), 0);
-    seccomp_rule_add(ctx, SCMP_ACT_KILL, SCMP_SYS(sendto), 0);
-    seccomp_rule_add(ctx, SCMP_ACT_KILL, SCMP_SYS(sendmsg), 0);
-    seccomp_rule_add(ctx, SCMP_ACT_KILL, SCMP_SYS(sendmmsg), 0);
-    seccomp_rule_add(ctx, SCMP_ACT_KILL, SCMP_SYS(msgsnd), 0);
-    
-    seccomp_arch_add(ctx, SCMP_ARCH_X32);
-	seccomp_load(ctx);
-
-	char *args[] = {"./sploit4", NULL};
-	execve(args[0], args, NULL);
-}
-```
--->
+The script will download sandbox1 to sandbox4
 
 Additionally, we have provided a `flag` file that stores a flag you required to get:
 
