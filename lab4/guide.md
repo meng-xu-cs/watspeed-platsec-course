@@ -21,9 +21,9 @@ sudo apt install gcc make strace -y
 Then, download and set up the lab files:
 
 ```bash
-wget http://ugster72d.student.cs.uwaterloo.ca/a4/a4_setup.sh
-chmod +x a4_setup.sh
-./a4_setup.sh
+wget https://raw.githubusercontent.com/meng-xu-cs/watspeed-platsec-course/main/lab4/files/setup.sh
+chmod +x setup.sh
+./setup.sh
 ```
 
 The script will download sandbox1 to sandbox4
