@@ -3,13 +3,11 @@
 
 ### Overview
 
-### 1. Lab Tasks
-
 In this lab, we have provided four binary executable files: sandbox1, sandbox2, sandbox3, and sandbox4. Each of these programs implements a `seccomp`-based sandbox and employs some distinct filtering rules. The programs are designed to execute external programs `sploit1`, `sploit2`, `sploit3`, and `sploit4` respectively.
 
 #### Hint: You can use `seccomp-tools` [(https://github.com/david942j/seccomp-tools)](https://github.com/david942j/seccomp-tools) to get the detailed seccomp rules.
 
-### 2. Environment Setup
+### Environment Setup (CloudLab VM)
 
 You should use a **CloudLab VM** for this assignment.
 
@@ -35,6 +33,8 @@ Additionally, we have provided a `flag` file that stores a flag you required to 
 ```
 s3ccoMp_$@nd80x_fla6
 ```
+
+### 1. Lab Tasks
 
 Your task is to write four exploit programs in C language, namely `sploit1.c`, `sploit2.c`, `sploit3.c`, and `sploit4.c`, and compile them into four binary executable files sploit1, sploit2, sploit3, and sploit4, respectively, in such a way that when running the sandbox programs, the contents of the flag file are written into standard output. You are expected to submit the four source code files of your exploit programs with a `Makefile`, such that we can get your compiled binary executable files by simply typing `make` in the terminal
 
