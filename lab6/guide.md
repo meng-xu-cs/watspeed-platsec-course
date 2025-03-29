@@ -105,7 +105,9 @@ git submodule update --init
 ./scripts/ugster-up.sh
 ```
 
-Upon successful completion, you will see an ==== END OF PROVISION === mark in the terminal.
+Upon successful completion, you will see an ==== END OF PROVISION === mark in the terminal as the following figure:
+
+   ![](images/lab6-image1.png)
 
    - NOTE: DO NOT use --recurse-submodules to clone the submodules as it will bring in many unnecessary dependencies of AFL++ and slow down the building process significantly.
    - The `./ugster-up.sh` script will take quite some time to finish (about an hour or even two hours) so you might find utilities such as `tmux` or `screen` useful in case of unreliable SSH connections.
