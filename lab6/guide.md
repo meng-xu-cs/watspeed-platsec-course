@@ -235,6 +235,9 @@ $ ./run-klee.sh pkg-sample
 The output should obviously show that:
    1) This package does not provide 100% code coverage
    2) It has a bug that is found by all tools.
+
+Here is a sample of running `$ ./run-gcov.sh pkg-sample`:
+ ![](images/lab6-image5.png)
       
 Despite that this package sample cannot “evade” any program analysis tool, feel free to duplicate this template package to bootstrap your package preparation that can eventually “evade” the tools.
 
