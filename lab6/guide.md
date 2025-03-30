@@ -217,8 +217,11 @@ The output of the AFL++ fuzzing results are stored in the output directory.
 
 ### 4. Examples
 
-The provided repository contains a sample package under directory `scripts/pkg-sample` to illustrate how a package should look like, with the addition of `interface.h` and `.gitignore` which shouldn’t
-be submitted. The code can also be found on [GitHub](https://github.com/meng-xu-cs/cs453-program-analysis-platform/tree/main/scripts/pkg-sample) as well.
+The provided repository contains a sample package under directory `scripts/pkg-sample` to illustrate how a package should look like, with the addition of `interface.h` and `.gitignore` which shouldn’t be submitted. 
+
+ ![](images/lab6-image4.png)
+
+The code can also be found on [GitHub](https://github.com/meng-xu-cs/cs453-program-analysis-platform/tree/main/scripts/pkg-sample) as well.
 
 You can test out the sample package inside the VM via:
 
