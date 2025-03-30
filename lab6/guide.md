@@ -45,7 +45,11 @@ Failing to do so will result in an invalid package that can’t be used to score
 bytes written out.
     - `void abort(void)` which forces a crash of program. Note that this is NOT the only way to crash a program.
 
-```
+The following figure is an example how the directory structure should be:
+
+ ![](images/lab6-image3.png)
+ 
+ ```
 //interface.h
 
 #include <stddef.h>
