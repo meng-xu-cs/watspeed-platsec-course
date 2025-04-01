@@ -229,7 +229,6 @@ You can test out the sample package inside the VM via:
 $ cd cs453-program-analysis-platform/scripts
 $ ./run-gcov.sh pkg-sample
 $ ./run-afl.sh pkg-sample
-$ ./run-klee.sh pkg-sample
 ```
 
 The output should obviously show that:
