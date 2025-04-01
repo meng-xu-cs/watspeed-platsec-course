@@ -71,7 +71,6 @@ Tips:
 
 A Dropbox has been created on LEARN for lab submission.
 To complete this lab,
-please submit the Shell (`.sh`) or Python (`.py`) script you prepared in step 2
-as well as the `safe_reader.c` file you prepared in step 3.
+please submit the four `.c` source code files of your exploit programs with a `Makefile`
 You can also submit any scripts, screenshots, or documents
 that you may deem necessary to show your understanding of the task.
