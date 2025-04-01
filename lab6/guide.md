@@ -2,7 +2,7 @@
 ## Bugs That Are Hard to Catch
 
 
-### Overview
+## Overview
 
 Program analysis is used both by attackers and defenders to hunt for potential issues in the software.
 However, there are always code patterns that pose unique challenges for these tools to analyze. The
@@ -96,7 +96,7 @@ Each package will be analyzed by all program analysis tools. For any tool X, if 
 **A maximum of 10 packages** can be submitted. You will have full points for tool X evasion as long as you have one package that “evaded” the detection from tool X. If you are confident that one package can be used to score all components, feel free to submit one package only. However, to be on the safe side, it is highly advised to submit multiple packages with
 different strategies to confuse these program analysis tools.
 
-### 1. Lab Environment Preparation
+## 1. Lab Environment Preparation
 
 For this lab, you will use a local VM running Ubuntu 22.04.5 LTS. Once your Ubuntu VM is ready, you can provision it with the following command:
 
@@ -119,7 +119,7 @@ Upon successful completion, you will see an ==== END OF PROVISION === mark in th
    - After provision, the entire VM will take about 30GB – 35GB storage on disk.
 
 
-### 2. Coverage tracking with `gcov`
+## 2. Coverage tracking with `gcov`
 [`gcov`](https://gcc.gnu.org/onlinedocs/gcc/Gcov.html) is a tool you can use in conjunction with `gcc` to test code coverage in your programs. In anutshell, it tracks the the portion of code that is “covered” by a concrete execution at runtime and aggregates the coverage results from multiple runs to produce a final coverage report.
 
 You can use the following `run-gcov.sh` script to check the coverage of your package. 
@@ -158,7 +158,7 @@ $ gcov -o ./ -n main.c
 ```
 If you read a 100% coverage in your console, it means your test suite (provided under the input/ directory) has achieved complete coverage in gcov’s perspective.
 
-### 3. Fuzzing with AFL++
+## 3. Fuzzing with AFL++
 
 We use the open-source [AFL++ fuzzer](https://github.com/AFLplusplus/AFLplusplus), in particular, version stable (commit hash 78b7e14) which is the most up-to-date stable release of AFL++ as the lab is developed. You may want to read a bit of details on the [project page](https://aflplus.plus/) about AFL++ and fuzzing in general.
 
@@ -215,7 +215,7 @@ $ afl-fuzz -i input -o output -- main
 
 The output of the AFL++ fuzzing results are stored in the output directory.
 
-### 4. Examples
+## 4. Examples
 
 The provided repository contains a sample package under directory `scripts/pkg-sample` to illustrate how a package should look like, with the addition of `interface.h` and `.gitignore` which shouldn’t be submitted. 
 
@@ -240,5 +240,10 @@ Here is a sample of running `$ ./run-gcov.sh pkg-sample`:
       
 Despite that this package sample cannot “evade” any program analysis tool, feel free to duplicate this template package to bootstrap your package preparation that can eventually “evade” the tools.
 
-### You have successfully completed the lab
+## Submission
 
+A Dropbox has been created on LEARN for lab submission.
+To complete this lab,
+please submit the four `.c` source code files of your exploit programs with a `Makefile`.
+You can also submit any scripts, screenshots, or documents
+that you may deem necessary to show your understanding of the task.
