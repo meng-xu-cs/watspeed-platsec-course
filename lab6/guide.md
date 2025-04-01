@@ -243,7 +243,6 @@ Despite that this package sample cannot “evade” any program analysis tool, f
 ## Submission
 
 A Dropbox has been created on LEARN for lab submission.
-To complete this lab,
-please submit the four `.c` source code files of your exploit programs with a `Makefile`.
+To complete this lab, please submit one or more test packages, each in its own folder, containing a single `main.c` file, an `input/` folder with test cases that achieve 100% code coverage, a `crash/` folder with at least one input that triggers the intended bug, and an optional `README.md` to explain your code and the bug. Only `main.c` is allowed—no additional code files or libraries—and your program must use only the provided `in()`, `out()`, and `abort()` functions for I/O and crashing. Do not include `interface.h`, compiled binaries, or unrelated files. Submit your packages as a `.zip` or `.tar.gz` archive via the Dropbox on LEARN.
 You can also submit any scripts, screenshots, or documents
 that you may deem necessary to show your understanding of the task.
