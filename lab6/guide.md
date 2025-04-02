@@ -165,6 +165,17 @@ We use the open-source [AFL++ fuzzer](https://github.com/AFLplusplus/AFLplusplus
 AFL++ is provisioned into the VM as a Docker image tagged as afl. Once in the VM, you can use
 the following command to run the Docker image, get an interactive shell, and explore around. 
 
+You need to install docker using the following command:
+```bash
+sudo snap install docker
+```
+
+Then, to have AFL++ easily available with everything compiled, pull the image directly from the Docker Hub using the following two commands:
+```bash
+docker pull aflplusplus/aflplusplus
+docker run -ti -v /location/of/your/target:/src aflplusplus/aflplusplus
+```
+
 ```
 docker run \
 --tty --interactive \
