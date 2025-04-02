@@ -162,9 +162,6 @@ If you read a 100% coverage in your console, it means your test suite (provided 
 
 We use the open-source [AFL++ fuzzer](https://github.com/AFLplusplus/AFLplusplus), in particular, version stable (commit hash 78b7e14) which is the most up-to-date stable release of AFL++ as the lab is developed. You may want to read a bit of details on the [project page](https://aflplus.plus/) about AFL++ and fuzzing in general.
 
-AFL++ is provisioned into the VM as a Docker image tagged as afl. Once in the VM, you can use
-the following command to run the Docker image, get an interactive shell, and explore around. 
-
 You need to install docker using the following command:
 ```bash
 sudo snap install docker
@@ -175,6 +172,9 @@ Then, to have AFL++ easily available with everything compiled, pull the image di
 docker pull aflplusplus/aflplusplus
 docker run -ti -v /location/of/your/target:/src aflplusplus/aflplusplus
 ```
+
+AFL++ is provisioned into the VM as a Docker image tagged as afl. Once in the VM, you can use
+the following command to run the Docker image, get an interactive shell, and explore around.
 
 ```
 docker run \
