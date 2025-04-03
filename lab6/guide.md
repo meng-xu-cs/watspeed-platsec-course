@@ -187,6 +187,8 @@ sudo docker pull aflplusplus/aflplusplus
 sudo docker run -ti -v /location/of/your/target:/src aflplusplus/aflplusplus
 ```
 
+   ![](images/lab6-image6.png)
+
 AFL++ is provisioned into the VM as a Docker image tagged as afl. Once in the VM, you can use
 the following command to run the Docker image, get an interactive shell, and explore around.
 
