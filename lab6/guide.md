@@ -183,8 +183,8 @@ docker --version
 
 Then, to have AFL++ easily available with everything compiled, pull the image directly from the Docker Hub using the following two commands:
 ```bash
-docker pull aflplusplus/aflplusplus
-docker run -ti -v /location/of/your/target:/src aflplusplus/aflplusplus
+sudo docker pull aflplusplus/aflplusplus
+sudo docker run -ti -v /location/of/your/target:/src aflplusplus/aflplusplus
 ```
 
 AFL++ is provisioned into the VM as a Docker image tagged as afl. Once in the VM, you can use
