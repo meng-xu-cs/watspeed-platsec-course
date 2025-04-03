@@ -201,7 +201,7 @@ docker run \
 bash
 ```
 
-You can use the followign `run-afl.sh` script to fuzz your package:
+You can use the following `run-afl.sh` script to fuzz your package:
 
 ```
 #!/bin/bash -e
