@@ -164,7 +164,21 @@ We use the open-source [AFL++ fuzzer](https://github.com/AFLplusplus/AFLplusplus
 
 You need to install docker using the following command:
 ```bash
-sudo snap install docker
+sudo apt update
+sudo apt install docker.io
+```
+
+Then enable and start the Docker service:
+
+```bash
+sudo systemctl enable docker
+sudo systemctl start docker
+```
+
+To verify if Docker is working, use the following command:
+
+```bash
+docker --version
 ```
 
 Then, to have AFL++ easily available with everything compiled, pull the image directly from the Docker Hub using the following two commands:
