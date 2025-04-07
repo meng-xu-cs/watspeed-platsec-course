@@ -195,7 +195,10 @@ the following command to run the Docker image, get an interactive shell, and exp
 ```bash
 docker run --tty --interactive --volume <path-to-your-package>:/test --workdir /test --rm aflplusplus/aflplusplus bash
 ```
+   #### * Make sure you replace <path-to-your-package> with the path to your test package directory (e.g., /home/student/lab6/pkg1).
 
+   ![](images/lab6-image7.png)
+   
 You can use the following `run-afl.sh` script to fuzz your package:
 
 ```
