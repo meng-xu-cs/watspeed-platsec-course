@@ -192,13 +192,8 @@ sudo docker run -ti -v /location/of/your/target:/src aflplusplus/aflplusplus
 AFL++ is provisioned into the VM as a Docker image tagged as afl. Once in the VM, you can use
 the following command to run the Docker image, get an interactive shell, and explore around.
 
-```
-docker run \
---tty --interactive \
---volume <path-to-your-package>:/test \
---workdir /test \
---rm afl \
-bash
+```bash
+docker run --tty --interactive --volume <path-to-your-package>:/test --workdir /test --rm aflplusplus/aflplusplus bash
 ```
 
 You can use the following `run-afl.sh` script to fuzz your package:
